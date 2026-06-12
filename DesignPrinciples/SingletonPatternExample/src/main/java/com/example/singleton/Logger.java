@@ -1,5 +1,4 @@
 package com.example.singleton;
-
 public class Logger {
     private static Logger instance;
 
@@ -13,7 +12,7 @@ public class Logger {
         }
         return instance;
     }
-
+// Example method to demonstrate functionality
     public void log(String message) {
         System.out.println("LOG: " + message);
     }
