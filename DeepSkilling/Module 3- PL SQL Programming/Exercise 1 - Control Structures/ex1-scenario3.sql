@@ -11,7 +11,6 @@ BEGIN
                           AND SYSDATE + 30
    )
    LOOP
-
       DBMS_OUTPUT.PUT_LINE(
          'Reminder: Loan '
          || rec.LoanID
