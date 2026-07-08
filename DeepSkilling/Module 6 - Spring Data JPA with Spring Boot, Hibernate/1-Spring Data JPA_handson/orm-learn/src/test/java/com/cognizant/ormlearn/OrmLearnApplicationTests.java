@@ -1,14 +1,14 @@
 package com.cognizant.ormlearn;
 
-import com.cognizant.ormlearn.model.Country;
-import com.cognizant.ormlearn.service.CountryService;
-import org.junit.Test;
-import org.mockito.Mockito;
-
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+
+import com.cognizant.ormlearn.model.Country;
+import com.cognizant.ormlearn.service.CountryService;
 
 public class OrmLearnApplicationTests {
 
