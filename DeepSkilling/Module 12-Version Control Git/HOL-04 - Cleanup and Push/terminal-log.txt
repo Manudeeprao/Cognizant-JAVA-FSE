@@ -1,0 +1,37 @@
+$ git status
+On branch main
+Your branch is ahead of 'origin/main' by 12 commits.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+
+$ git branch -a
+* main
+  remotes/origin/HEAD -> origin/main
+  remotes/origin/main
+
+$ git pull origin main
+From https://github.com/LuckysHorizon/Cognizant-JAVA-FSE-Digital-Nurture-5.0
+ * branch            main       -> FETCH_HEAD
+Already up to date.
+
+$ git push origin main
+To https://github.com/LuckysHorizon/Cognizant-JAVA-FSE-Digital-Nurture-5.0.git
+   ff22faa..8326a4a  main -> main
+
+$ git fetch origin
+
+$ git log origin/main --oneline
+8326a4a add terminal log for conflict resolution lab
+1645842 ignore backup files in conflict resolution folder
+a8b0038 resolve merge conflict in hello.xml
+2f7da50 add hello.xml with production db config
+7eaa792 bump version and add dark mode feature
+5f778df add hello.xml with app config
+b88e943 add terminal log for branching lab
+89702ec add branching lab notes
+de2abf1 add terminal log for gitignore lab
+3cf4830 update gitignore for log files
+ae5d98b add module 10 debugging exercises
+159d418 Welcome.txt
+ff22faa Fix track categories and add direct module links to README

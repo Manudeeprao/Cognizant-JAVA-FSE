@@ -1,0 +1,58 @@
+$ ls HOL-01\ -\ Git\ Ignore/
+application.log  log/
+
+$ cat application.log
+2026-07-27 09:14:02 INFO started process
+2026-07-27 09:14:03 INFO connecting to database on port 5432
+2026-07-27 09:14:05 WARN connection pool nearly exhausted (47/50)
+2026-07-27 09:14:08 INFO request processed in 230ms
+
+$ ls log/
+debug.log
+
+$ git status -u "FSE construct – Platforms & GenAI/Module 11 – Version control - GIT/HOL-01 - Git Ignore"
+On branch main
+Your branch is ahead of 'origin/main' by 2 commits.
+  (use "git push" to publish your local commits)
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	FSE construct – Platforms & GenAI/Module 11 – Version control - GIT/HOL-01 - Git Ignore/application.log
+	FSE construct – Platforms & GenAI/Module 11 – Version control - GIT/HOL-01 - Git Ignore/log/debug.log
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+$ cat > .gitignore
+*.log
+log/
+
+$ git status -u "FSE construct – Platforms & GenAI/Module 11 – Version control - GIT/HOL-01 - Git Ignore"
+On branch main
+Your branch is ahead of 'origin/main' by 2 commits.
+  (use "git push" to publish your local commits)
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	FSE construct – Platforms & GenAI/Module 11 – Version control - GIT/HOL-01 - Git Ignore/.gitignore
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+$ git check-ignore -v "FSE construct – Platforms & GenAI/Module 11 – Version control - GIT/HOL-01 - Git Ignore/application.log"
+.gitignore:1:*.log	FSE construct – Platforms & GenAI/Module 11 – Version control - GIT/HOL-01 - Git Ignore/application.log
+
+$ git check-ignore -v "FSE construct – Platforms & GenAI/Module 11 – Version control - GIT/HOL-01 - Git Ignore/log/debug.log"
+.gitignore:2:log/	FSE construct – Platforms & GenAI/Module 11 – Version control - GIT/HOL-01 - Git Ignore/log/debug.log
+
+$ git add "FSE construct – Platforms & GenAI/Module 11 – Version control - GIT/HOL-01 - Git Ignore/.gitignore"
+
+$ git commit -m "update gitignore for log files"
+[main 3cf4830] update gitignore for log files
+ 1 file changed, 2 insertions(+)
+ create mode 100644 FSE construct – Platforms & GenAI/Module 11 – Version control - GIT/HOL-01 - Git Ignore/.gitignore
+
+$ git status
+On branch main
+Your branch is ahead of 'origin/main' by 3 commits.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean

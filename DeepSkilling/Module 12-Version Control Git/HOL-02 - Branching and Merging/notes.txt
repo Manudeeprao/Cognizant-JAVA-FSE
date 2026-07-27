@@ -1,0 +1,3 @@
+fast-forward merge: happens when trunk has no new commits since the branch was created
+three-way merge: happens when both trunk and branch have diverged
+rebase: replays commits on top of another branch
