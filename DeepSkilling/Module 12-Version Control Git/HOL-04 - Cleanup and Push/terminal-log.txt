@@ -1,37 +1,166 @@
+jupal@Manudeep MINGW64 ~/OneDrive/Desktop/GitDemo (main)
 $ git status
 On branch main
-Your branch is ahead of 'origin/main' by 12 commits.
-  (use "git push" to publish your local commits)
+Your branch is up to date with 'origin/main'.
 
 nothing to commit, working tree clean
 
+jupal@Manudeep MINGW64 ~/OneDrive/Desktop/GitDemo (main)
+$ git checkout -b GitWork
+Switched to a new branch 'GitWork'
+
+jupal@Manudeep MINGW64 ~/OneDrive/Desktop/GitDemo (GitWork)
+$ echo "<message>Hello from GitWork</message>" > hello.xml
+
+jupal@Manudeep MINGW64 ~/OneDrive/Desktop/GitDemo (GitWork)
+$ cat hello.xml
+<message>Hello from GitWork</message>
+
+jupal@Manudeep MINGW64 ~/OneDrive/Desktop/GitDemo (GitWork)
+$ git status
+On branch GitWork
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        hello.xml
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+jupal@Manudeep MINGW64 ~/OneDrive/Desktop/GitDemo (GitWork)
+$ git add hello.xml
+warning: in the working copy of 'hello.xml', LF will be replaced by CRLF the next time Git touches it
+
+jupal@Manudeep MINGW64 ~/OneDrive/Desktop/GitDemo (GitWork)
+$ git commit -m "Added hello.xml in GitWork"
+[GitWork 84d8d9b] Added hello.xml in GitWork
+ 1 file changed, 1 insertion(+)
+ create mode 100644 hello.xml
+
+jupal@Manudeep MINGW64 ~/OneDrive/Desktop/GitDemo (GitWork)
+$ git checkout main
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+
+jupal@Manudeep MINGW64 ~/OneDrive/Desktop/GitDemo (main)
+$ echo "<message>Hello from Main Branch</message>" > hello.xml
+
+jupal@Manudeep MINGW64 ~/OneDrive/Desktop/GitDemo (main)
+$ cat hello.xml
+<message>Hello from Main Branch</message>
+
+jupal@Manudeep MINGW64 ~/OneDrive/Desktop/GitDemo (main)
+$ git add hello.xml
+warning: in the working copy of 'hello.xml', LF will be replaced by CRLF the next time Git touches it
+
+jupal@Manudeep MINGW64 ~/OneDrive/Desktop/GitDemo (main)
+$ git commit -m "Added hello.xml in main"
+[main 9431db0] Added hello.xml in main
+ 1 file changed, 1 insertion(+)
+ create mode 100644 hello.xml
+
+jupal@Manudeep MINGW64 ~/OneDrive/Desktop/GitDemo (main)
+$ git log --oneline --graph --decorate --all
+* 9431db0 (HEAD -> main) Added hello.xml in main
+| * 84d8d9b (GitWork) Added hello.xml in GitWork
+|/
+* 65cd8ee (origin/main) Added branch.txt in GitNewBranch
+* bcaa266 Update .gitignore for log files
+* ec768ee (origin/master) Initial Commit
+
+jupal@Manudeep MINGW64 ~/OneDrive/Desktop/GitDemo (main)
+$ git diff main GitWork
+diff --git a/hello.xml b/hello.xml
+index 064b23b..84f3217 100644
+--- a/hello.xml
++++ b/hello.xml
+@@ -1 +1 @@
+-<message>Hello from Main Branch</message>
++<message>Hello from GitWork</message>
+
+jupal@Manudeep MINGW64 ~/OneDrive/Desktop/GitDemo (main)
+$ git difftool main GitWork
+
+Launching P4Merge...
+Visual differences displayed using P4Merge.
+
+jupal@Manudeep MINGW64 ~/OneDrive/Desktop/GitDemo (main)
+$ git merge GitWork
+Auto-merging hello.xml
+CONFLICT (add/add): Merge conflict in hello.xml
+Automatic merge failed; fix conflicts and then commit the result.
+
+jupal@Manudeep MINGW64 ~/OneDrive/Desktop/GitDemo (main|MERGING)
+$ cat hello.xml
+<<<<<<< HEAD
+<message>Hello from Main Branch</message>
+=======
+<message>Hello from GitWork</message>
+>>>>>>> GitWork
+
+jupal@Manudeep MINGW64 ~/OneDrive/Desktop/GitDemo (main|MERGING)
+$ notepad hello.xml
+
+jupal@Manudeep MINGW64 ~/OneDrive/Desktop/GitDemo (main|MERGING)
+$ git add hello.xml
+
+jupal@Manudeep MINGW64 ~/OneDrive/Desktop/GitDemo (main|MERGING)
+$ git commit -m "Resolved merge conflict in hello.xml"
+[main 3e2d7b1] Resolved merge conflict in hello.xml
+
+jupal@Manudeep MINGW64 ~/OneDrive/Desktop/GitDemo (main)
+$ git status
+On branch main
+nothing to commit, working tree clean
+
+jupal@Manudeep MINGW64 ~/OneDrive/Desktop/GitDemo (main)
+$ echo "*.orig" >> .gitignore
+
+jupal@Manudeep MINGW64 ~/OneDrive/Desktop/GitDemo (main)
+$ cat .gitignore
+*.log
+log/
+*.orig
+
+jupal@Manudeep MINGW64 ~/OneDrive/Desktop/GitDemo (main)
+$ git add .gitignore
+
+jupal@Manudeep MINGW64 ~/OneDrive/Desktop/GitDemo (main)
+$ git commit -m "Updated .gitignore for backup files"
+[main 7c31b54] Updated .gitignore for backup files
+ 1 file changed, 1 insertion(+)
+
+jupal@Manudeep MINGW64 ~/OneDrive/Desktop/GitDemo (main)
 $ git branch -a
 * main
-  remotes/origin/HEAD -> origin/main
+  GitWork
   remotes/origin/main
+  remotes/origin/master
 
-$ git pull origin main
-From https://github.com/LuckysHorizon/Cognizant-JAVA-FSE-Digital-Nurture-5.0
- * branch            main       -> FETCH_HEAD
-Already up to date.
+jupal@Manudeep MINGW64 ~/OneDrive/Desktop/GitDemo (main)
+$ git branch -d GitWork
+Deleted branch GitWork (was 84d8d9b).
 
-$ git push origin main
-To https://github.com/LuckysHorizon/Cognizant-JAVA-FSE-Digital-Nurture-5.0.git
-   ff22faa..8326a4a  main -> main
+jupal@Manudeep MINGW64 ~/OneDrive/Desktop/GitDemo (main)
+$ git log --oneline --graph --decorate
+* 7c31b54 (HEAD -> main) Updated .gitignore for backup files
+*   3e2d7b1 Resolved merge conflict in hello.xml
+|\
+| * 84d8d9b Added hello.xml in GitWork
+* | 9431db0 Added hello.xml in main
+|/
+* 65cd8ee (origin/main) Added branch.txt in GitNewBranch
+* bcaa266 Update .gitignore for log files
+* ec768ee (origin/master) Initial Commit
 
-$ git fetch origin
+jupal@Manudeep MINGW64 ~/OneDrive/Desktop/GitDemo (main)
+$ git push
+Enumerating objects: 8, done.
+Counting objects: 100% (8/8), done.
+Delta compression using up to 12 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (5/5), done.
+Total 5 (delta 0), reused 0 (delta 0)
+To https://github.com/Manudeeprao/GitDemo.git
+   65cd8ee..7c31b54  main -> main
 
-$ git log origin/main --oneline
-8326a4a add terminal log for conflict resolution lab
-1645842 ignore backup files in conflict resolution folder
-a8b0038 resolve merge conflict in hello.xml
-2f7da50 add hello.xml with production db config
-7eaa792 bump version and add dark mode feature
-5f778df add hello.xml with app config
-b88e943 add terminal log for branching lab
-89702ec add branching lab notes
-de2abf1 add terminal log for gitignore lab
-3cf4830 update gitignore for log files
-ae5d98b add module 10 debugging exercises
-159d418 Welcome.txt
-ff22faa Fix track categories and add direct module links to README
+jupal@Manudeep MINGW64 ~/OneDrive/Desktop/GitDemo (main)
+$

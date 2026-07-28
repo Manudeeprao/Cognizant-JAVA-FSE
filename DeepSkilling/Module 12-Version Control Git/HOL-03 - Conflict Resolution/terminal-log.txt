@@ -1,215 +1,108 @@
-$ git status
-On branch main
-Your branch is ahead of 'origin/main' by 6 commits.
-  (use "git push" to publish your local commits)
+jupal@Manudeep MINGW64 ~/OneDrive/Desktop/GitDemo (main)
+$ cd ~/OneDrive/Desktop/GitDemo
 
+jupal@Manudeep MINGW64 ~/OneDrive/Desktop/GitDemo (main)
+$ git branch GitNewBranch
+
+jupal@Manudeep MINGW64 ~/OneDrive/Desktop/GitDemo (main)
+$ git branch -a
+  GitNewBranch
+* main
+  remotes/origin/main
+  remotes/origin/master
+
+jupal@Manudeep MINGW64 ~/OneDrive/Desktop/GitDemo (main)
+$ git checkout GitNewBranch
+Switched to branch 'GitNewBranch'
+
+jupal@Manudeep MINGW64 ~/OneDrive/Desktop/GitDemo (GitNewBranch)
+$ echo "This file belongs to GitNewBranch" > branch.txt
+
+jupal@Manudeep MINGW64 ~/OneDrive/Desktop/GitDemo (GitNewBranch)
+$ cat branch.txt
+This file belongs to GitNewBranch
+
+jupal@Manudeep MINGW64 ~/OneDrive/Desktop/GitDemo (GitNewBranch)
+$ git status
+On branch GitNewBranch
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        branch.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+jupal@Manudeep MINGW64 ~/OneDrive/Desktop/GitDemo (GitNewBranch)
+$ git add branch.txt
+warning: in the working copy of 'branch.txt', LF will be replaced by CRLF the next time Git touches it
+
+jupal@Manudeep MINGW64 ~/OneDrive/Desktop/GitDemo (GitNewBranch)
+$ git commit -m "Added branch.txt in GitNewBranch"
+[GitNewBranch 65cd8ee] Added branch.txt in GitNewBranch
+ 1 file changed, 1 insertion(+)
+ create mode 100644 branch.txt
+
+jupal@Manudeep MINGW64 ~/OneDrive/Desktop/GitDemo (GitNewBranch)
+$ git status
+On branch GitNewBranch
 nothing to commit, working tree clean
 
-$ git branch GitWork
-
-$ git checkout GitWork
-Switched to branch 'GitWork'
-
-$ cat hello.xml
-<?xml version="1.0" encoding="UTF-8"?>
-<application>
-  <name>TaskTracker</name>
-  <version>1.0.0</version>
-  <database>
-    <host>localhost</host>
-    <port>5432</port>
-    <name>taskdb</name>
-  </database>
-</application>
-
-$ git add hello.xml
-
-$ git commit -m "add hello.xml with app config"
-[GitWork 5f778df] add hello.xml with app config
- 1 file changed, 10 insertions(+)
- create mode 100644 FSE construct – Platforms & GenAI/Module 11 – Version control - GIT/HOL-03 - Conflict Resolution/hello.xml
-
-$ cat hello.xml
-<?xml version="1.0" encoding="UTF-8"?>
-<application>
-  <name>TaskTracker</name>
-  <version>2.0.0</version>
-  <database>
-    <host>localhost</host>
-    <port>5432</port>
-    <name>taskdb</name>
-  </database>
-  <features>
-    <darkMode>true</darkMode>
-  </features>
-</application>
-
-$ git status
-On branch GitWork
-Changes not staged for commit:
-  (use "git add <file>..." to update what will be committed)
-  (use "git restore <file>..." to discard changes in working directory)
-	modified:   hello.xml
-
-no changes added to commit (use "git add" and/or "git commit -a")
-
-$ git add hello.xml
-
-$ git commit -m "bump version and add dark mode feature"
-[GitWork 7eaa792] bump version and add dark mode feature
- 1 file changed, 4 insertions(+), 1 deletion(-)
-
+jupal@Manudeep MINGW64 ~/OneDrive/Desktop/GitDemo (GitNewBranch)
 $ git checkout main
 Switched to branch 'main'
-Your branch is ahead of 'origin/main' by 6 commits.
-  (use "git push" to publish your local commits)
+Your branch is up to date with 'origin/main'.
 
-$ cat hello.xml
-<?xml version="1.0" encoding="UTF-8"?>
-<application>
-  <name>TaskTracker</name>
-  <version>1.5.0</version>
-  <database>
-    <host>db.production.internal</host>
-    <port>5432</port>
-    <name>taskdb_prod</name>
-  </database>
-</application>
+jupal@Manudeep MINGW64 ~/OneDrive/Desktop/GitDemo (main)
+$ git diff main GitNewBranch
+diff --git a/branch.txt b/branch.txt
+new file mode 100644
+index 0000000..e2eb06f
+--- /dev/null
++++ b/branch.txt
+@@ -0,0 +1 @@
++This file belongs to GitNewBranch
 
-$ git add hello.xml
+jupal@Manudeep MINGW64 ~/OneDrive/Desktop/GitDemo (main)
+$ git difftool main GitNewBranch
 
-$ git commit -m "add hello.xml with production db config"
-[main 2f7da50] add hello.xml with production db config
- 1 file changed, 10 insertions(+)
- create mode 100644 FSE construct – Platforms & GenAI/Module 11 – Version control - GIT/HOL-03 - Conflict Resolution/hello.xml
+Launching P4Merge...
+Visual differences displayed using P4Merge.
 
-$ git log --oneline --graph --decorate --all
-* 2f7da50 (HEAD -> main) add hello.xml with production db config
-| * 7eaa792 (GitWork) bump version and add dark mode feature
-| * 5f778df add hello.xml with app config
-|/
-* b88e943 add terminal log for branching lab
-* 89702ec add branching lab notes
-* de2abf1 add terminal log for gitignore lab
-* 3cf4830 update gitignore for log files
-* ae5d98b add module 10 debugging exercises
-* 159d418 Welcome.txt
-* ff22faa (origin/main, origin/HEAD) Fix track categories and add direct module links to README
+jupal@Manudeep MINGW64 ~/OneDrive/Desktop/GitDemo (main)
+$ git merge GitNewBranch
+Updating bcaa266..65cd8ee
+Fast-forward
+ branch.txt | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 branch.txt
 
-$ git diff main..GitWork -- hello.xml
-diff --git a/hello.xml b/hello.xml
-index ef3e29e..44f04c3 100644
---- a/hello.xml
-+++ b/hello.xml
-@@ -1,10 +1,13 @@
- <?xml version="1.0" encoding="UTF-8"?>
- <application>
-   <name>TaskTracker</name>
--  <version>1.5.0</version>
-+  <version>2.0.0</version>
-   <database>
--    <host>db.production.internal</host>
-+    <host>localhost</host>
-     <port>5432</port>
--    <name>taskdb_prod</name>
-+    <name>taskdb</name>
-   </database>
-+  <features>
-+    <darkMode>true</darkMode>
-+  </features>
- </application>
+jupal@Manudeep MINGW64 ~/OneDrive/Desktop/GitDemo (main)
+$ git log --oneline --graph --decorate
+* 65cd8ee (HEAD -> main, GitNewBranch) Added branch.txt in GitNewBranch
+* bcaa266 (origin/main) Update .gitignore for log files
+* ec768ee (origin/master) Initial Commit
 
-$ git merge GitWork
-Auto-merging hello.xml
-CONFLICT (add/add): Merge conflict in hello.xml
-Automatic merge failed; fix conflicts and then commit the result.
+jupal@Manudeep MINGW64 ~/OneDrive/Desktop/GitDemo (main)
+$ git branch -d GitNewBranch
+Deleted branch GitNewBranch (was 65cd8ee).
 
-$ cat hello.xml
-<?xml version="1.0" encoding="UTF-8"?>
-<application>
-  <name>TaskTracker</name>
-<<<<<<< HEAD
-  <version>1.5.0</version>
-  <database>
-    <host>db.production.internal</host>
-    <port>5432</port>
-    <name>taskdb_prod</name>
-  </database>
-=======
-  <version>2.0.0</version>
-  <database>
-    <host>localhost</host>
-    <port>5432</port>
-    <name>taskdb</name>
-  </database>
-  <features>
-    <darkMode>true</darkMode>
-  </features>
->>>>>>> GitWork
-</application>
-
---- resolving conflict manually ---
---- took version 2.0.0 from GitWork, kept production db from main, added features from GitWork ---
-
-$ cat hello.xml
-<?xml version="1.0" encoding="UTF-8"?>
-<application>
-  <name>TaskTracker</name>
-  <version>2.0.0</version>
-  <database>
-    <host>db.production.internal</host>
-    <port>5432</port>
-    <name>taskdb_prod</name>
-  </database>
-  <features>
-    <darkMode>true</darkMode>
-  </features>
-</application>
-
-$ git add hello.xml
-
-$ git commit -m "resolve merge conflict in hello.xml"
-[main a8b0038] resolve merge conflict in hello.xml
-
+jupal@Manudeep MINGW64 ~/OneDrive/Desktop/GitDemo (main)
 $ git status
 On branch main
-Your branch is ahead of 'origin/main' by 10 commits.
+Your branch is ahead of 'origin/main' by 1 commit.
   (use "git push" to publish your local commits)
 
 nothing to commit, working tree clean
 
-$ cat > .gitignore
-*.bak
-*.orig
+jupal@Manudeep MINGW64 ~/OneDrive/Desktop/GitDemo (main)
+$ git push
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 12 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 369 bytes | 369.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+To https://github.com/Manudeeprao/GitDemo.git
+   bcaa266..65cd8ee  main -> main
 
-$ git add .gitignore
-
-$ git commit -m "ignore backup files in conflict resolution folder"
-[main 1645842] ignore backup files in conflict resolution folder
- 1 file changed, 2 insertions(+)
- create mode 100644 FSE construct – Platforms & GenAI/Module 11 – Version control - GIT/HOL-03 - Conflict Resolution/.gitignore
-
-$ git branch -a
-  GitWork
-* main
-  remotes/origin/HEAD -> origin/main
-  remotes/origin/main
-
-$ git branch -d GitWork
-Deleted branch GitWork (was 7eaa792).
-
-$ git log --oneline --graph --decorate
-* 1645842 (HEAD -> main) ignore backup files in conflict resolution folder
-*   a8b0038 resolve merge conflict in hello.xml
-|\
-| * 7eaa792 bump version and add dark mode feature
-| * 5f778df add hello.xml with app config
-* | 2f7da50 add hello.xml with production db config
-|/
-* b88e943 add terminal log for branching lab
-* 89702ec add branching lab notes
-* de2abf1 add terminal log for gitignore lab
-* 3cf4830 update gitignore for log files
-* ae5d98b add module 10 debugging exercises
-* 159d418 Welcome.txt
-* ff22faa (origin/main, origin/HEAD) Fix track categories and add direct module links to README
+jupal@Manudeep MINGW64 ~/OneDrive/Desktop/GitDemo (main)
+$
